@@ -7,12 +7,12 @@ copyright: "Copyright &copy; 2026 UnB Gama - Projeto Integrador 1"
 
 # Extensões Globais (CSS e JS)
 extra_css:
-  - css/custom-general.css
-  - css/maze-bg.css
-  - css/home-sections.css
+  - assets/css/custom-general.css
+  - assets/css/maze-bg.css
+  - assets/css/home-sections.css
 
 extra_javascript:
-  - js/maze-bg.js
+  - assets/js/maze-bg.js
 
 # Plugins Ativos
 plugins:
@@ -54,3 +54,7 @@ theme:
 # Estrutura de Navegação (Menu)
 nav:
   - Home: index.md
+  - Energia: docs/energia/index.md
+  - Hardware: docs/hardware/index.md
+  - Software: docs/software/index.md
+  - Estrutura: docs/estrutura/index.md
