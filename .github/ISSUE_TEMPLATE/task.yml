@@ -25,7 +25,7 @@ body:
     id: type-labels
     attributes:
       label: Tipo de Tarefa
-      categorias:
+      options:
         - "Software (Desenvolvimento geral em src/)"
         - "Firmware (Código embarcado em src/firmware/)"
         - "Backend (Lógica de servidor em src/backend/)"
