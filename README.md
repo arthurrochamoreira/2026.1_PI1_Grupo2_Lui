@@ -37,7 +37,7 @@ Ao finalizar uma tarefa, abra um PR para a `main`. **É obrigatório o preenchim
 * **O quê** foi feito e o **porquê**.
 * A **Issue** relacionada (ex: `#42`).
 * Lista objetiva de **alterações**.
-* Passo a passo de **como testar** (simulador ou físico).
+* Passo a passo de **como testar** se aplicável (simulador ou físico).
 
 ### 4. Revisão por Pares (Code Review)
 * Todo PR deve ser revisado por, no mínimo, um colega de equipe.
