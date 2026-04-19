@@ -14,6 +14,7 @@ extra_css:
 
 extra_javascript:
   - assets/js/maze-bg.js
+  - assets/js/perfect_embed.js
 
 # Plugins Ativos
 plugins:
