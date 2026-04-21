@@ -1,5 +1,12 @@
 
 <canvas id="bgCanvas"></canvas>
+<style>
+  .md-content h1:first-of-type { font-size: 4.5rem !important; }
+  .md-content h1 { font-size: 3rem !important; }
+  .md-content h2 { font-size: 2rem !important; }
+  .md-content p { font-size: 0.9rem !important; }
+</style>
+
 
 #
 
@@ -14,7 +21,7 @@
 
   <div class="presentation-content">
     <div class="presentation-text">
-      <p style="font-size: 1.1rem; color: #94a3b8; font-style: italic; line-height: 1.8;">
+      <p style="font-size: var(--home-fs-lead); color: #94a3b8; font-style: italic; line-height: 1.8;">
         Desenvolvimento de um micromouse: um robô autônomo inteligente capaz de explorar e resolver labirintos desconhecidos com alta eficiência. O projeto integra soluções de <strong style="color: #fff;">Energia</strong>, <strong style="color: #fff;">Estrutura</strong>, <strong style="color: #fff;">Hardware</strong> e <strong style="color: #fff;">Software</strong> para criar uma plataforma robusta de navegação autônoma e monitoramento em tempo real.
       </p>
       <div class="presentation-stats">
