@@ -1,9 +1,30 @@
 
 # Roteiro de Testes Funcionais — Micromouse
 
+<!--
+  SOBRE ESTE ROTEIRO
+  ==================
+  Os testes estão divididos em três partes:
+
+  1. Unitários  — Testa cada peça sozinha (sensor, motor, encoder).
+  2. Integrados — Testa as peças funcionando juntas e a lógica do Flood Fill.
+  3. De Sistema — Testa o robô resolvendo o labirinto de verdade, em duas fases:
+       Fase 1 (Exploração): O robô anda devagar, descobre as paredes e monta um mapa.
+       Fase 2 (Corrida):    Com o mapa pronto, o robô refaz o caminho mais curto em velocidade máxima.
+
+  Seguir sempre a parede direita NÃO funciona em labirintos de competição
+  porque existem "ilhas" de paredes que fazem o robô andar em círculos.
+  Por isso usamos o Flood Fill.
+-->
+
 ---
 
 ## Testes Unitários
+
+<!--
+  Cada teste aqui verifica uma peça por vez, separada do resto.
+  Se o sensor ou o motor não funcionar sozinho, não adianta testar o robô inteiro.
+-->
 
 | Código | Caso de Teste | Objetivo | Pré-condições | Procedimentos | Resultado Esperado | Reparo | Pós-Reparo |
 | :---: | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -19,6 +40,18 @@
 
 ## Testes Integrados
 
+<!--
+  Aqui as peças são testadas funcionando juntas.
+  CT-08 a CT-12: O robô anda, faz curvas e para — motores e sensores cooperando.
+  CT-13: O robô guarda no mapa onde tem parede e onde não tem.
+  CT-14: O Flood Fill funciona assim:
+    - O centro do labirinto recebe o valor 0 (é o destino).
+    - As células ao redor recebem 1, depois 2, 3... como uma enchente se espalhando.
+    - O robô sempre anda para o vizinho com o número menor.
+    - Se descobre uma parede nova, refaz a enchente e continua.
+    - Com isso, ele sempre encontra o caminho mais curto que conhece até ali.
+-->
+
 | Código | Caso de Teste | Objetivo | Pré-condições | Procedimentos | Resultado Esperado | Reparo | Pós-Reparo |
 | :---: | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **CT-08** | **Avanço de Célula** | Validar deslocamento motor + encoder. | CT-03, 05, 07 aprovados; Corredor reto. | 1. Marcar posição inicial.<br>2. Comandar avanço (1 célula).<br>3. Medir parada. | Parada precisa dentro da célula seguinte. | Ajustar conversão pulsos -> cm no código. | Validar 5 avanços consecutivos com precisão. |
@@ -26,14 +59,38 @@
 | **CT-10** | **Correção de Rumo** | Validar alinhamento dinâmico via sensores. | CT-02, 09 aprovados; Corredor padrão. | 1. Iniciar robô torto (10°).<br>2. Observar autocorreção. | Robô se alinha e percorre o eixo central sem tocar paredes. | Revisar lógica de controle Proporcional (PID) lateral. | Confirmar alinhamento partindo de diversos ângulos. |
 | **CT-11** | **Curvas de 90°** | Validar rotação angular precisa. | CT-08 aprovado; Trecho com curva. | 1. Executar curva Esq.<br>2. Executar curva Dir.<br>3. Checar alinhamento. | Robô finaliza rotação alinhado ao novo corredor. | Ajustar constantes de tempo/delay de rotação. | Confirmar alinhamento consistente em 3 ciclos. |
 | **CT-12** | **Meia-Volta (180°)** | Validar detecção de Dead End e retorno. | CT-07, 11 aprovados; Célula sem saída. | 1. Entrar no corredor cego.<br>2. Observar manobra de saída. | Identificação do bloqueio + rotação 180° e saída limpa. | Corrigir lógica condicional de sensores (F+L+R). | Validar manobra sem colisões em beco sem saída. |
+| **CT-13** | **Escrita de Mapa** | | | | | | |
+| **CT-14** | **Lógica Flood Fill** | | | | | | |
 
 ---
 
 ## Testes de Sistema
 
+<!--
+  O robô resolve o labirinto em duas etapas:
+
+  Fase 1 — Exploração (CT-15)
+    O robô não sabe nada sobre o labirinto.
+    Ele anda devagar, célula por célula, anotando onde tem parede.
+    Usa o Flood Fill para escolher para onde ir.
+    Cada vez que encontra uma parede nova, refaz a "enchente" de números.
+    O importante aqui é chegar ao centro sem bater — pode ser lento.
+
+  Fase 2 — Corrida (CT-16)
+    Agora o robô já tem o mapa na memória.
+    Ele calcula o caminho mais curto e percorre em velocidade máxima.
+    É essa fase que vale na competição.
+
+  Para o nosso projeto (PI1), o objetivo é:
+    Fazer o Flood Fill básico funcionar, explorar o labirinto inteiro
+    e depois tentar a corrida. A primeira vez vai ser devagar, e tá tudo bem.
+-->
+
 | Código | Caso de Teste | Objetivo | Pré-condições | Procedimentos | Resultado Esperado | Reparo | Pós-Reparo |
 | :---: | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **CT-13** | **Navegação Completa** | Validar resolução do labirinto. | CT-08 a 12 aprovados; Labirinto 4x4; Bateria OK. | 1. Posicionar na partida.<br>2. Iniciar modo autônomo.<br>3. Monitorar percurso. | Chegada ao destino em < 5min e sem colisões. | Identificar falha local e re-testar integração específica. | Validar percurso total sem intervenção humana. |
+| **CT-15** | **Fase 1 — Exploração** | | | | | | |
+| **CT-16** | **Fase 2 — Corrida** | | | | | | |
+
 
 ## Template para Preenchimento
 
