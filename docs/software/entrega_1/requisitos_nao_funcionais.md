@@ -133,6 +133,137 @@ Como os dados serão utilizados para avaliação, é fundamental garantir que n�
 
 Para garantir que o sistema funcione nos equipamentos disponíveis durante as avaliações, independentemente do laboratório ou computador utilizado, é necessário definir um conjunto mínimo de navegadores suportados. As versões ≥ 110 foram escolhidas por oferecerem amplo suporte a APIs modernas como WebSocket, CSS Grid e Fetch API, recursos que provavelmente serão utilizados no desenvolvimento da interface de telemetria.
 
+# Restrições de Ambiente e Documentação de Software
+
+## 1. Introdução
+
+As restrições estão organizadas em quatro camadas: **firmware embarcado** (o software que roda no robô), **backend** (o servidor que recebe e processa os dados), **frontend** (a interface web) e **banco de dados**.
+
+## 2. Firmware Embarcado
+
+### RE-01 — Microcontrolador
+
+| Atributo | Valor |
+|---|---|
+| **Tecnologia adotada** | ESP32 |
+| **Linguagem** | C/C++ (framework Arduino ou ESP-IDF) |
+| **Restrição** | O firmware deve ser compilado e executado exclusivamente no ESP32 |
+
+O ESP32 foi escolhido por integrar Wi-Fi nativamente, o que é indispensável para a transmissão de telemetria em tempo real ao sistema web sem a necessidade de módulos adicionais. É também o microcontrolador com maior disponibilidade de bibliotecas para controle de motores, leitura de sensores infravermelhos e encoders (componentes centrais do micromouse). Alternativas como o STM32 são mais poderosas para controle em tempo real, mas exigiriam um módulo Wi-Fi externo, aumentando a complexidade do hardware.
+
+### RE-02 — Protocolo de Comunicação
+
+| Atributo | Valor |
+|---|---|
+| **Protocolo** | Wi-Fi (IEEE 802.11 b/g/n) + UDP ou WebSocket |
+| **Restrição** | A comunicação entre robô e servidor deve ocorrer via rede local (LAN) |
+| **Frequência mínima de envio** | 1 pacote por segundo durante a corrida |
+
+O UDP foi considerado por ser mais leve e ter menor latência do que o TCP, adequado para o envio contínuo de dados de telemetria onde a perda eventual de um pacote é aceitável. O WebSocket sobre TCP é uma alternativa caso optemos por uma comunicação bidirecional mais robusta com o servidor. A rede local elimina a dependência de internet durante as apresentações, garantindo maior confiabilidade.
+
+### RE-03 — Sensores Suportados
+
+| Atributo | Valor |
+|---|---|
+| **Sensores de distância** | Infravermelho (IR) ou ultrassônico (HC-SR04 ou similar) |
+| **Encoder de rodas** | Encoder incremental compatível com GPIO do ESP32 |
+| **Restrição** | O firmware deve ser capaz de ler e processar dados de pelo menos 3 sensores de distância simultaneamente (frente, esquerda, direita) |
+
+A detecção de paredes em três direções é o mínimo para que algoritmos de navegação como o flood fill ou wall-following funcionem corretamente. O ESP32 possui GPIOs suficientes para suportar essa configuração sem necessidade de multiplexação.
+
+## 3. Backend
+
+### RE-04 — Linguagem e Framework
+
+| Atributo | Valor |
+|---|---|
+| **Linguagem** | Python 3.10 ou superior |
+| **Framework** | FastAPI |
+| **Restrição** | O backend deve ser executável localmente sem necessidade de infraestrutura em nuvem |
+
+Python é a linguagem de maior familiaridade entre os integrantes do grupo. O FastAPI foi escolhido sobre o Flask por ter suporte nativo a WebSocket, que é essencial para a transmissão de telemetria em tempo real e por ser assíncrono por padrão, o que permite lidar com múltiplas conexões simultâneas (professores e integrantes acompanhando a apresentação) com melhor desempenho. A execução local elimina dependências externas durante as apresentações.
+
+### RE-05 — Sistema Operacional do Servidor
+
+| Atributo | Valor |
+|---|---|
+| **Sistemas suportados** | Windows 10/11, Ubuntu 22.04 LTS, macOS 12 ou superior |
+| **Restrição** | O backend deve inicializar e operar corretamente em qualquer um dos sistemas listados |
+
+O grupo pode usar diferentes sistemas operacionais nas sua máquinas pessoais. Garantir compatibilidade com os três sistemas mais comuns evita que a apresentação dependa de um equipamento específico. O Python 3.10+ e o FastAPI são multiplataforma por natureza, então essa restrição é atendida sem esforço adicional desde que as dependências sejam gerenciadas via `requirements.txt` ou similar.
+
+### RE-06 — Gerenciamento de Dependências
+
+| Atributo | Valor |
+|---|---|
+| **Ferramenta** | pip + arquivo `requirements.txt` |
+| **Restrição** | Todas as dependências do backend devem estar listadas no `requirements.txt` com versões fixadas |
+
+Fixar versões das dependências garante que o sistema funcione da mesma forma em qualquer máquina onde for instalado.
+
+## 4. Frontend
+
+### RE-07 — Tecnologias de Interface
+
+| Atributo | Valor |
+|---|---|
+| **Tecnologias** | HTML5, CSS3, JavaScript (ES6+) |
+| **Restrição** | A interface não deve depender de frameworks externos que exijam processo de build (ex: React, Vue com Vite) |
+
+Utilizar HTML, CSS e JavaScript puros elimina a necessidade de configurar ambientes de build (Node.js, npm, Webpack, etc.), reduzindo a complexidade de instalação e execução. Para o escopo do projeto, frameworks pesados não trazem benefícios que justifiquem o custo de setup. A atualização em tempo real pode ser implementada com a Fetch API ou WebSocket nativos do navegador.
+
+### RE-08 — Navegadores Suportados
+
+| Atributo | Valor |
+|---|---|
+| **Navegadores** | Google Chrome ≥ 110, Mozilla Firefox ≥ 110, Microsoft Edge ≥ 110 |
+| **Restrição** | A interface deve funcionar corretamente em qualquer um dos navegadores listados, sem plugins adicionais |
+
+As versões ≥ 110 foram escolhidas por garantirem suporte completo a WebSocket, CSS Grid, Flexbox e Fetch API. São também versões com ampla adoção, presentes na maioria dos notebooks atuais sem necessidade de atualização.
+
+### RE-09 — Layout Responsivo
+
+| Atributo | Valor |
+|---|---|
+| **Restrição** | A interface deve se adaptar a telas de notebooks e desktops convencionais sem perda de usabilidade |
+| **Referência mínima** | Telas com largura a partir de 1024px |
+
+Durante as apresentações, diferentes dispositivos podem ser utilizados para acessar a interface. Garantir que o layout funcione a partir de 1024px cobre a grande maioria dos notebooks atualmente, sem a necessidade de otimização para dispositivos móveis, que não fazem parte do escopo de uso do sistema.
+
+## 5. Banco de Dados
+
+### RE-10 — Sistema de Banco de Dados
+
+| Atributo | Valor |
+|---|---|
+| **Tecnologia** | SQLite 3 |
+| **Restrição** | O banco de dados deve ser um arquivo local, sem necessidade de servidor dedicado |
+
+O SQLite foi escolhido por ser um banco de dados baseado em arquivo. Para o volume de dados esperado (~100 corridas, ~100 MB), o SQLite é mais que suficiente em termos de desempenho. Sua portabilidade também é uma vantagem, já que o banco de dados é um único arquivo que pode ser copiado, versionado e compartilhado facilmente entre os integrantes do grupo.
+
+### RE-11 — Acesso ao Banco de Dados
+
+| Atributo | Valor |
+|---|---|
+| **Biblioteca** | SQLAlchemy (ORM) ou sqlite3 (biblioteca padrão do Python) |
+| **Restrição** | O acesso ao banco deve ser feito exclusivamente pelo backend; a interface web não deve ter acesso direto ao banco |
+
+Centralizar o acesso ao banco no backend garante que toda escrita e leitura de dados passe por uma camada de validação, prevenindo inconsistências e atendendo ao requisito de integridade dos dados (RNF-10). O uso de SQLAlchemy como ORM facilita a manutenção do código e a eventual migração para outro banco de dados caso necessário.
+
+## 6. Resumo das Restrições Tecnológicas
+
+| ID | Camada | Tecnologia | Versão mínima |
+|---|---|---|---|
+| RE-01 | Firmware | ESP32 (C/C++) | ESP-IDF 5.0 / Arduino Core 2.0 |
+| RE-02 | Firmware | Wi-Fi + UDP/WebSocket | IEEE 802.11 b/g/n |
+| RE-04 | Backend | Python + FastAPI | Python 3.10 |
+| RE-05 | Backend | Windows / Ubuntu / macOS | Win 10, Ubuntu 22.04, macOS 12 |
+| RE-07 | Frontend | HTML5 + CSS3 + JS | ES6+ |
+| RE-08 | Frontend | Chrome / Firefox / Edge | versão 110 |
+| RE-09 | Frontend | Layout responsivo | largura ≥ 1024px |
+| RE-10 | Banco de dados | SQLite 3 | versão 3.35+ |
+
+
 
 
 
