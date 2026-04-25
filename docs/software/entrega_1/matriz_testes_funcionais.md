@@ -59,8 +59,8 @@
 | **CT-10** | **Correção de Rumo** | Validar alinhamento dinâmico via sensores. | CT-02, 09 aprovados; Corredor padrão. | 1. Iniciar robô torto (10°).<br>2. Observar autocorreção. | Robô se alinha e percorre o eixo central sem tocar paredes. | Revisar lógica de controle Proporcional (PID) lateral. | Confirmar alinhamento partindo de diversos ângulos. |
 | **CT-11** | **Curvas de 90°** | Validar rotação angular precisa. | CT-08 aprovado; Trecho com curva. | 1. Executar curva Esq.<br>2. Executar curva Dir.<br>3. Checar alinhamento. | Robô finaliza rotação alinhado ao novo corredor. | Ajustar constantes de tempo/delay de rotação. | Confirmar alinhamento consistente em 3 ciclos. |
 | **CT-12** | **Meia-Volta (180°)** | Validar detecção de Dead End e retorno. | CT-07, 11 aprovados; Célula sem saída. | 1. Entrar no corredor cego.<br>2. Observar manobra de saída. | Identificação do bloqueio + rotação 180° e saída limpa. | Corrigir lógica condicional de sensores (F+L+R). | Validar manobra sem colisões em beco sem saída. |
-| **CT-13** | **Escrita de Mapa** | | | | | | |
-| **CT-14** | **Lógica Flood Fill** | | | | | | |
+| **CT-13** | **Escrita de Mapa** | Validar se o robô salva corretamente as paredes na matriz de memória. | CT-01, CT-02 aprovados; robô em uma célula de teste; Serial aberto. | 1. Colocar o robô em célula com paredes conhecidas (ex: Esq e Frente).<br>2. Ler os sensores.<br>3. Imprimir matriz no Serial. | A matriz reflete exatamente as paredes lidas na célula atual (ex: salva 1 onde tem parede e 0 onde não tem). | Revisar uso de índices (X, Y) ou manipulação de bits na gravação do array. | Validar o mapeamento movendo o robô para 3 células diferentes. |
+| **CT-14** | **Lógica Flood Fill** | Validar a atualização dos pesos numéricos para encontrar o centro. | CT-13 aprovado; mapa inicializado com paredes (simulação via código). | 1. Injetar um labirinto simulado na memória.<br>2. Rodar a função Flood Fill.<br>3. Verificar no Serial o próximo movimento. | O algoritmo atribui os "pesos" corretamente e escolhe mover para a célula vizinha com o menor valor numérico. | Corrigir lógica da fila ou cálculo de células adjacentes no código. | O algoritmo deve traçar o caminho perfeito em um mapa estático conhecido no Serial. |
 
 ---
 
@@ -88,14 +88,14 @@
 
 | Código | Caso de Teste | Objetivo | Pré-condições | Procedimentos | Resultado Esperado | Reparo | Pós-Reparo |
 | :---: | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **CT-15** | **Fase 1 — Exploração** | | | | | | |
-| **CT-16** | **Fase 2 — Corrida** | | | | | | |
+| **CT-15** | **Fase 1 — Exploração** | Validar a navegação autônoma do início ao centro construindo o mapa. | CT-08 a CT-14 aprovados; labirinto físico montado; robô na largada. | 1. Ligar o robô no Modo Exploração.<br>2. Soltar o robô.<br>3. Acompanhar mapeamento e recalculos até o centro. | O robô anda célula a célula, não bate nas paredes, refaz o Flood Fill ao achar becos e para na célula central. | Ajustar máquina de estados principal ou recalibrar constantes do PID. | O robô deve conseguir chegar ao centro sozinho pelo menos uma vez, mesmo que lento. |
+| **CT-16** | **Fase 2 — Corrida** | Validar a execução do trajeto ótimo (caminho mais curto) utilizando o mapa salvo. | CT-15 concluído com sucesso (mapa completo na memória). | 1. Posicionar robô de volta na largada.<br>2. Acionar Modo Corrida.<br>3. Observar o trajeto escolhido pelo robô. | O robô percorre o caminho mais curto de forma contínua e direta, ignorando os becos mapeados anteriormente. | Ajustar leitura da matriz de caminhos na memória para evitar re-exploração ou loop. | Completar o percurso de forma direta do início ao centro, sem entrar em becos já conhecidos. |
 
-
+<!--
 ## Template para Preenchimento
 
 | Código | Caso de Teste | Objetivo | Pré-condições | Procedimentos | Resultado Esperado | Reparo | Pós-Reparo |
 | :---: | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **CT-0X** | **Nome do Teste** | Finalidade técnica... | Estado do sistema... | 1. Passo A<br>2. Passo B | Pós-condição final... | Ação corretiva... | Re-teste final... |
 
----
+-->
