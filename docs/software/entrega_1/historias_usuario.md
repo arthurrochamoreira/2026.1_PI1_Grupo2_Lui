@@ -6,7 +6,7 @@ Este documento consolida as Histórias de Usuário (US) do projeto.
 - **US: Definição da Arquitetura e Persistência** (#31)
 - **US: Planejamento de Testes Funcionais** (#29)
 - **US: Prototipagem e Comportamento do Software** (#27)
-- **US: Backlog Funcional (MoSCoW)** (#25)
+- **US: Backlog Funcional (MoSCoW)** (#35, #42)
 - **US: Mapeamento de Processos e Fluxos** (#23)
 
 ---
