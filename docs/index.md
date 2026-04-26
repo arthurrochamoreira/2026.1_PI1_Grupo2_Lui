@@ -217,7 +217,7 @@
       </div>
     </div>
     <div class="team-card__body">
-      <div class="team-card__name">João Vitor Pires</div>
+      <div class="team-card__name">João Vitor Pereira</div>
       <div class="team-card__handle">@joaovitor</div>
     </div>
     <div class="team-card__role">Hardware</div>
