@@ -1,9 +1,6 @@
 ### Equipe de Desenvolvimento
 **PI1 Grupo 02 — Professor Lui**
 
-<p align="center">
-  <img src="docs/assets/gifs/micromouse.svg" alt="Micromouse Banner" width="100%" height="120" style="object-fit: cover;">
-</p>
 
 
 <div align="center">
