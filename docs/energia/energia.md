@@ -32,10 +32,13 @@ Abaixo, detalha-se a corrente média (regime constante) e a corrente de pico (ce
 Considerando o tempo total de operação (**t**) de **1800 segundos** (**30 minutos**) e a tensão nominal da bateria de **7.4V**:
 
 * **Energia Consumida (E):**
-  $$E=V\times I\times t=7,4V\times 0,505A\times 1800s=6726,6~J$$
+
+  $E=V\times I\times t=7,4V\times 0,505A\times 1800s=6726,6~J$
+
 * **Conversão para Watt-hora:** **1,87 Wh**.
 * **Capacidade em mAh:**
-  $$C = I \times t = 505\text{mA} \times 0,5\text{h} = 252,5\text{ mAh}$$
+
+  $C = I \times t = 505\text{mA} \times 0,5\text{h} = 252,5\text{ mAh}$
 
 ## 4. Escolha da Fonte e Margem de Segurança
 
