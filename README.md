@@ -1,6 +1,9 @@
 ### Equipe de Desenvolvimento
 **PI1 Grupo 02 — Professor Lui**
 
+
+![Visitas](https://visitor-badge.laobi.icu/badge?page_id=fcte-pi1.2026.1_PI1_Grupo2_Lui&left_text=Visitas)
+
 <p align="center">
   <img src="docs/assets/gifs/micromouse.svg" alt="Micromouse Banner" width="100%" height="120" style="object-fit: cover;">
 </p>
