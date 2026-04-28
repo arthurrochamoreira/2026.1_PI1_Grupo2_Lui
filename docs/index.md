@@ -47,7 +47,7 @@
   </div>
   <div class="section-counter">
     <span class="counter-label">Colaboradores</span>
-    <span class="counter-value">19 Integrantes</span>
+    <span class="counter-value">18 Integrantes</span>
   </div>
 </div>
 
@@ -189,26 +189,9 @@
     <div class="team-card__role">Energia</div>
   </a>
 
-  <a class="team-card" href="https://github.com/isadoraqo">
-    <div class="team-card__header">
-      <span class="team-card__index">Membro #09</span>
-      <span class="team-card__manager"></span>
-    </div>
-    <div class="team-card__avatar-wrapper">
-      <div class="team-card__avatar-inner">
-        <img src="https://github.com/isadoraqo.png" alt="Isadora Quaresma" />
-      </div>
-    </div>
-    <div class="team-card__body">
-      <div class="team-card__name">Isadora Quaresma</div>
-      <div class="team-card__handle">@isadoraqo</div>
-    </div>
-    <div class="team-card__role">Hardware</div>
-  </a>
-
   <a class="team-card" href="#">
     <div class="team-card__header">
-      <span class="team-card__index">Membro #10</span>
+      <span class="team-card__index">Membro #09</span>
       <span class="team-card__manager">Gerente</span>
     </div>
     <div class="team-card__avatar-wrapper">
@@ -225,7 +208,7 @@
 
   <a class="team-card" href="https://github.com/xLucasMelo">
     <div class="team-card__header">
-      <span class="team-card__index">Membro #11</span>
+      <span class="team-card__index">Membro #10</span>
       <span class="team-card__manager"></span>
     </div>
     <div class="team-card__avatar-wrapper">
@@ -242,7 +225,7 @@
 
   <a class="team-card" href="#">
     <div class="team-card__header">
-      <span class="team-card__index">Membro #12</span>
+      <span class="team-card__index">Membro #11</span>
       <span class="team-card__manager">Gerente</span>
     </div>
     <div class="team-card__avatar-wrapper">
@@ -259,7 +242,7 @@
 
   <a class="team-card" href="https://github.com/heyclarinham">
     <div class="team-card__header">
-      <span class="team-card__index">Membro #13</span>
+      <span class="team-card__index">Membro #12</span>
       <span class="team-card__manager">Gerente de Projeto</span>
     </div>
     <div class="team-card__avatar-wrapper">
@@ -276,7 +259,7 @@
 
   <a class="team-card" href="https://github.com/nandjala">
     <div class="team-card__header">
-      <span class="team-card__index">Membro #14</span>
+      <span class="team-card__index">Membro #13</span>
       <span class="team-card__manager"></span>
     </div>
     <div class="team-card__avatar-wrapper">
@@ -293,7 +276,7 @@
 
   <a class="team-card" href="https://github.com/gpaulovit">
     <div class="team-card__header">
-      <span class="team-card__index">Membro #15</span>
+      <span class="team-card__index">Membro #14</span>
       <span class="team-card__manager"></span>
     </div>
     <div class="team-card__avatar-wrapper">
@@ -310,7 +293,7 @@
 
   <a class="team-card" href="https://github.com/dev-americo">
     <div class="team-card__header">
-      <span class="team-card__index">Membro #16</span>
+      <span class="team-card__index">Membro #15</span>
       <span class="team-card__manager"></span>
     </div>
     <div class="team-card__avatar-wrapper">
@@ -327,7 +310,7 @@
 
   <a class="team-card" href="https://github.com/pwdrinho">
     <div class="team-card__header">
-      <span class="team-card__index">Membro #17</span>
+      <span class="team-card__index">Membro #16</span>
       <span class="team-card__manager"></span>
     </div>
     <div class="team-card__avatar-wrapper">
@@ -344,7 +327,7 @@
 
   <a class="team-card" href="#">
     <div class="team-card__header">
-      <span class="team-card__index">Membro #18</span>
+      <span class="team-card__index">Membro #17</span>
       <span class="team-card__manager"></span>
     </div>
     <div class="team-card__avatar-wrapper">
@@ -361,7 +344,7 @@
 
   <a class="team-card" href="https://github.com/viniiribeiro">
     <div class="team-card__header">
-      <span class="team-card__index">Membro #19</span>
+      <span class="team-card__index">Membro #18</span>
       <span class="team-card__manager"></span>
     </div>
     <div class="team-card__avatar-wrapper">
