@@ -9,14 +9,16 @@ copyright: "Copyright &copy; 2026 UnB Gama - Projeto Integrador 1"
 extra_css:
   - assets/css/custom-general.css
   - assets/css/maze-bg.css
-  - assets/css/home-sections.css
-  - assets/css/team-cards.css
 
 extra_javascript:
   - assets/js/maze-bg.js
   - assets/js/perfect_embed.js
   - assets/js/mathjax.js
+  - assets/js/header-extras.js
+  - assets/js/secondary-nav.js
   - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+  
 
 # Plugins Ativos
 plugins:
